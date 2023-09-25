@@ -1,0 +1,45 @@
+<?php include 'view/inc/header.inc.php';?>
+
+<div class="container">
+    <div class="header">
+        <h5 class ="display-4 text-center">Edit Client Notification</h5>
+    </div>
+    <form method="POST">
+    <!-- This part of the php will GET error from URL and output the error for USER -->
+    <?php if (isset($_GET['error'])) {?>
+        <div class="alert alert-danger" role="alert">
+            <?php echo $_GET['error']; ?>
+        </div>
+    <?php } ?>
+        <input type="hidden" name="action" value="editclientnotif">
+        <div class="form-group">
+            <!-- In the following PHP statement, it will grab whatever the user picked and ECHO it if user is missing other fields -->
+            <label for="cid"> Client ID: </label>
+            <input type="text" id="cid" name="cid" class="form-control" value="<?php if(isset($_GET['cid'])) echo ($_GET['cid']); ?>" placeholder="Enter Client ID" disabled><br>
+            <label for="nid"> Notification ID: </label>
+            <input type="text" id="nid" name="nid" class="form-control" value="<?php if(isset($_GET['nid'])) echo ($_GET['nid']); ?>" placeholder="Enter Notification ID" disabled><br>
+        </div>
+        <div class="form-group">
+            <label>Start Date for Notification: </label>
+            <!-- In the following PHP statement, it will grab whatever the user picked and ECHO it if user is missing other fields -->
+            <input type="date" id="date" name="date" value="<?php if(isset($_GET['date'])) echo ($_GET['date']); ?>"><br><br>
+            <label>Frequency: </label>
+            <input type="number" id="frequency" class="form-control" name="frequency" value="<?php if(isset($_GET['frequency'])) echo ($_GET['frequency']); ?>"><br>
+        </div>
+        <div class="form-group">
+            <label for="type">Status: </label>
+            <select name="type" id="type" class="form-control">
+                <!-- In the following PHP statement, it will grab whatever the user picked and ECHO it if user is missing other fields -->
+                <option value="Active" selected <?php if(isset($_GET['type']) && $_GET['type'] == 'Active') echo 'selected'; ?>>Active</option>
+                <option value="Inactive" <?php if(isset($_GET['type']) && $_GET['type'] == 'Inactive') echo 'selected'; ?>>Inactive</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary" name="create" onclick="return confirm('Are you sure you want to update?')">Update Client Notification</button>
+        <a class="btn btn-primary" href="?page=homepage" role="button">Main Menu</a>
+    </form>
+</div>
+
+<?php include 'view/inc/footer.inc.php'; ?>
+
+<?php show_source(__file__)?>
+

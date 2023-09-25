@@ -1,0 +1,69 @@
+<?php include 'view/inc/header.inc.php';?>
+
+<div class="container">
+    <div class="header">
+        <h5 class ="display-4 text-center">Create Client</h5>
+    </div>
+    <form method="POST">
+    <!-- This part of the php will GET error from URL and output the error for USER -->
+    <?php if (isset($_GET['error'])) {?>
+        <div class="alert alert-danger" role="alert">
+            <?php echo $_GET['error']; ?>
+        </div>
+    <?php } ?>
+        <input type="hidden" name="action" value="createclient">
+        <div class="form-group">
+            <!-- In the following PHP statement, it will grab whatever the user picked and ECHO it if user is missing other fields -->
+            <label for="model">Company Name: </label>
+            <input type="text" id="compName" name="compName" class="form-control" value="<?php if(isset($_GET['compName'])) echo ($_GET['compName']); ?>" placeholder="Enter company name"><br>
+            <label for="busNum">Business Number: </label>
+            <input type="text" id="busNum" name="busNum" class="form-control" value="<?php if(isset($_GET['busNum'])) echo ($_GET['busNum']); ?>" placeholder="Enter business number"><br>
+            <label for="fname">Contact's First Name: </label>
+            <input type="text" id="fname" name="fname" class="form-control" value="<?php if(isset($_GET['fname'])) echo ($_GET['fname']); ?>" placeholder="Enter contact's first name"><br>
+            <label for="lname">Contact's Last Name: </label>
+            <input type="lname" id="lname" name="lname" class="form-control" value="<?php if(isset($_GET['lname'])) echo ($_GET['lname']); ?>" placeholder="Enter contact's last name"><br>
+            <label for="phNum">Phone Number: </label>
+            <input type="text" id="phNum" name="phNum" class="form-control" value="<?php if(isset($_GET['phNum'])) echo ($_GET['phNum']); ?>" placeholder="Enter phone number"><br>
+            <label for="cellNum">Cell Number: </label>
+            <input type="text" id="cellNum" name="cellNum" class="form-control" value="<?php if(isset($_GET['cellNum'])) echo ($_GET['cellNum']); ?>" placeholder="Enter cell number"><br>
+        </div>
+        <div class="form-group">
+            <label>Carrier: </label>
+            <!-- In the following PHP statement, it will grab whatever the user picked and ECHO it if user is missing other fields -->
+            <input type="radio" id="bell" name="carrier" value="Bell" <?php if(isset($_GET['carrier']) && $_GET['carrier'] == 'Bell') echo 'checked="checked" '; ?>>
+            <label for="bell">Bell</label>&nbsp;&nbsp;
+            <input type="radio" id="fido" name="carrier" value="Fido" <?php if(isset($_GET['carrier']) && $_GET['carrier'] == 'Fido') echo 'checked="checked" '; ?> >
+            <label for="fido">Fido</label>&nbsp;&nbsp;
+            <input type="radio" id="rogers" name="carrier" value="Rogers" <?php if(isset($_GET['carrier']) && $_GET['carrier'] == 'Rogers') echo 'checked="checked" '; ?>>
+            <label for="rogers">Rogers</label>&nbsp;&nbsp;
+            <input type="radio" id="koodo" name="carrier" value="Koodo" <?php if(isset($_GET['carrier']) && $_GET['carrier'] == 'Koodo') echo 'checked="checked" '; ?>>
+            <label for="koodo">Koodo</label>
+            <input type="radio" id="freedom" name="carrier" value="Freedom" <?php if(isset($_GET['carrier']) && $_GET['carrier'] == 'Freedom') echo 'checked="checked" '; ?>>
+            <label for="freedom">Freedom</label>
+            <input type="radio" id="telus" name="carrier" value="Telus" <?php if(isset($_GET['carrier']) && $_GET['carrier'] == 'Telus') echo 'checked="checked" '; ?>>
+            <label for="telus">Telus</label>
+        </div>
+        <div class="form-group">    
+            <!-- In the following PHP statement, it will grab whatever the user picked and ECHO it if user is missing other fields -->
+            <label for="hst">HST Number: </label>
+            <input type="number" id="hst" name="hst" class="form-control" value="<?php if(isset($_GET['hst'])) echo ($_GET['hst']); ?>" placeholder="Enter HST number"><br>
+            <label for="website">Website: </label>
+            <input type="text" id="website" name="website" class="form-control" value="<?php if(isset($_GET['website'])) echo ($_GET['website']); ?>" placeholder="Enter Website"><br>
+        </div>
+        <div class="form-group">
+            <label for="type">Status: </label>
+            <select name="type" id="type" class="form-control">
+                <!-- In the following PHP statement, it will grab whatever the user picked and ECHO it if user is missing other fields -->
+                <option value="Inactive" <?php if(isset($_GET['type']) && $_GET['type'] == 'Inactive') echo 'selected'; ?>>Inactive</option>
+                <option value="Active" selected <?php if(isset($_GET['type']) && $_GET['type'] == 'Active') echo 'selected'; ?>>Active</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary" name="create">Add Client</button>
+        <a class="btn btn-primary" href="?page=viewclient" role="button">View Clients</a>
+        <a class="btn btn-primary" href="?page=homepage" role="button">Main Menu</a>
+
+    </form>
+</div>
+
+<?php include 'view/inc/footer.inc.php';?>
+<?php show_source(__file__)?>

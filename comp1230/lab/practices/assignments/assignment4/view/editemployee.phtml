@@ -1,0 +1,60 @@
+<?php include 'view/inc/header.inc.php';?>
+
+<div class="container">
+    <div class="header">
+        <h5 class ="display-4 text-center">Update Employee</h5>
+    </div>
+    <form method="POST">
+    <!-- This part of the php will GET error from URL and output the error for USER -->
+    <?php if (isset($_GET['error'])) {?>
+        <div class="alert alert-danger" role="alert">
+            <?php echo $_GET['error']; ?>
+        </div>
+    <?php } ?>
+        <input type="hidden" name="action" value="editemployee">
+        <div class="form-group">
+            <!-- In the following PHP statement, it will grab whatever the user picked and ECHO it if user is missing other fields -->
+            <label for="efname">First Name: </label>
+            <input type="text" id="efname" name="efname" class="form-control" value="<?php if(isset($_GET['efname'])) echo ($_GET['efname']); ?>" placeholder="Enter employee's first name"><br>
+            <label for="elname">Last Name: </label>
+            <input type="elname" id="elname" name="elname" class="form-control" value="<?php if(isset($_GET['elname'])) echo ($_GET['elname']); ?>" placeholder="Enter employee's last name"><br>
+            <label for="eemail">Email: </label>
+            <input type="text" id="eemail" name="eemail" class="form-control" value="<?php if(isset($_GET['eemail'])) echo ($_GET['eemail']); ?>" placeholder="Enter email"><br>
+            <label for="ecell">Cell Number: </label>
+            <input type="text" id="ecell" name="ecell" class="form-control" value="<?php if(isset($_GET['ecell'])) echo ($_GET['ecell']); ?>" placeholder="Enter cell number"><br>
+        </div>
+        <div class="form-group">
+            <label>Position: </label>
+            <!-- In the following PHP statement, it will grab whatever the user picked and ECHO it if user is missing other fields -->
+            <input type="radio" id="manager" name="position" value="manager" <?php if(isset($_GET['position']) && $_GET['position'] == 'manager') echo 'checked="checked" '; ?>>
+            <label for="manager">Manager</label>&nbsp;&nbsp;
+            <input type="radio" id="seniorAcc" name="position" value="seniorAcc" <?php if(isset($_GET['position']) && $_GET['position'] == 'seniorAcc') echo 'checked="checked" '; ?> >
+            <label for="seniorAcc">Senior Accountant</label>&nbsp;&nbsp;
+            <input type="radio" id="jrAcc" name="position" value="jrAcc" <?php if(isset($_GET['position']) && $_GET['position'] == 'jrAcc') echo 'checked="checked" '; ?>>
+            <label for="jrAcc">Junior Accountant</label>&nbsp;&nbsp;
+            <input type="radio" id="chartAcc" name="position" value="chartAcc" <?php if(isset($_GET['position']) && $_GET['position'] == 'chartAcc') echo 'checked="checked" '; ?>>
+            <label for="chartAcc">Chartered Accountant</label>
+            <input type="radio" id="bookkeeper" name="position" value="bookkeeper" <?php if(isset($_GET['position']) && $_GET['position'] == 'bookkeeper') echo 'checked="checked" '; ?>>
+            <label for="bookkeeper">Book Keeper</label>
+        </div>
+        <div class="form-group">
+            <!-- In the following PHP statement, it will grab whatever the user picked and ECHO it if user is missing other fields -->    
+            <label for="password">Password: </label>
+            <input type="text" id="password" name="password" class="form-control" value="<?php if(isset($_GET['password'])) echo ($_GET['password']); ?>" placeholder="Enter password"><br>
+        </div>
+        <div class="form-group">
+            <label for="type">Status: </label>
+            <select name="type" id="type" class="form-control">
+                <!-- In the following PHP statement, it will grab whatever the user picked and ECHO it if user is missing other fields -->
+                <option value="Inactive" <?php if(isset($_GET['type']) && $_GET['type'] == 'Inactive') echo 'selected'; ?>>Inactive</option>
+                <option value="Active" <?php if(isset($_GET['type']) && $_GET['type'] == 'Active') echo 'selected'; ?>>Active</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary" name="create" onclick="return confirm('Are you sure you want to update?')">Update Employee</button>
+        <a class="btn btn-primary" href="?page=homepage" role="button">Main Menu</a>
+    </form>
+</div>
+
+<?php include 'view/inc/footer.inc.php';?>
+<?php show_source(__file__)?>
+

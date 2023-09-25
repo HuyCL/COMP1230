@@ -1,0 +1,47 @@
+<?php include 'view/inc/header.inc.php'; 
+include 'model/database.pdo.php';
+
+// Fetches all data from the client table in DB
+$sql_getData = $db_conn->prepare("SELECT * FROM notifications");
+$sql_getData->execute();
+$result = $sql_getData->fetchAll(PDO::FETCH_ASSOC);
+?>
+
+<!--Main page for viewing Notifications-->
+<div class="container">
+    <div class="box">
+        <h5 class ="display-4 text-center">View Notification</h5>
+            <table class ="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Notification Id</th>
+                        <th scope="col">Notification Name</th>
+                        <th scope="col">Notification Type</th>
+                        <th scope="col">Notification Status</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!--Goes through the client table and displays data for each Notification-->
+                    <?php foreach ($result as $client) : ?>
+                    <tr>
+                        <td><?php print_r($client['notificationId'])?></td>
+                        <td><?php print_r($client['Notification_Name'])?></td>
+                        <td><?php print_r($client['Notification_Type'])?></td>
+                        <td><?php print_r($client['Notification_Action'])?></td>
+                        <td>
+                            <!--Whichever client user decides to update, this will grab the information of that Notification selected-->
+                            <a href="?page=editnotification&nid=<?= $client['notificationId'] ?>&nname=<?= $client['Notification_Name'] ?>&ntype=<?= $client['Notification_Type'] ?>&type=<?= $client['Notification_Action'] ?>">Edit</a>
+                        </td>
+                    </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        <a class="btn btn-primary" href="?page=notification" role="button">Add Notification</a>
+        <a class="btn btn-primary" href="?page=searchnotification" role="button">Search Notification</a>
+        <a class="btn btn-primary" href="?page=homepage" role="button">Main Menu</a>
+    </div>
+</div>
+
+<?php include 'view/inc/footer.inc.php'; ?>
+<?php show_source(__file__)?>

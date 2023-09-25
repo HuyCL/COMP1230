@@ -1,0 +1,59 @@
+<?php include 'view/inc/header.inc.php'; 
+include 'model/database.pdo.php';
+
+// Fetches all data in the employee table in DB
+if(isset($_GET['search'])){
+    $id = $_GET['search'];
+    $sql_getData = $db_conn->prepare("SELECT * FROM employee WHERE employeeId = $id");
+    $sql_getData->execute();
+    $result = $sql_getData->fetchAll(PDO::FETCH_ASSOC);
+}
+?>
+
+<div class="container">
+    <div class="box">
+        <h5 class ="display-4 text-center">Search by Employee ID</h5>
+                <form method="GET">
+                <!--A text field to ask user which employee to search for by ID-->
+                <input type="hidden" name="page" value="searchemployee">
+                <input type="text" name="search" placeholder="Search by Employee ID">
+                <input type="submit" class="btn btn-primary" value="Search">
+                <a class="btn btn-primary" href="?page=searchemployee" role="button">Refresh</a>
+                <table class ="table table-striped">
+                    <thead>
+                            <tr>
+                            <th scope="col">Employee Id</th>
+                            <th scope="col">First Name</th>
+                            <th scope="col">Last Name</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Cell Number</th>
+                            <th scope="col">Position</th>
+                            <th scope="col">Password</th>
+                            <th scope="col">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!--Goes through the employee table and displays data for each employee-->
+                        <?php foreach ($result as $employee) : ?>
+                        <tr>
+                            <td><?php print_r($employee['employeeId'])?></td>
+                            <td><?php print_r($employee['firstName'])?></td>
+                            <td><?php print_r($employee['lastName'])?></td>
+                            <td><?php print_r($employee['email'])?></td>
+                            <td><?php print_r($employee['cellNumber'])?></td>
+                            <td><?php print_r($employee['position'])?></td>
+                            <td><?php print_r($employee['e_password'])?></td>
+                            <td><?php print_r($employee['status1'])?></td>
+                        </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+                </form>
+        
+            <a class="btn btn-primary" href="?page=homepage" role="button">Main Menu</a>
+    </div>
+</div>
+
+<?php include 'view/inc/footer.inc.php'; ?>
+
+<?php show_source(__file__)?>

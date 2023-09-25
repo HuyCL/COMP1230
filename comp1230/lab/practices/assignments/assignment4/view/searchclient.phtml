@@ -1,0 +1,65 @@
+<?php include 'view/inc/header.inc.php'; 
+include 'model/database.pdo.php';
+
+// Fetches all data in the employee table in DB
+if(isset($_GET['search'])){
+    $id = $_GET['search'];
+    $sql_getData = $db_conn->prepare("SELECT * FROM client WHERE clientId = $id");
+    $sql_getData->execute();
+    $result = $sql_getData->fetchAll(PDO::FETCH_ASSOC);
+}
+?>
+
+<div class="container">
+    <div class="box">
+        <h5 class ="display-4 text-center">Search by Client ID</h5>
+                <form method="GET">
+                <!--A text field to ask user which client to search for by ID-->
+                <input type="hidden" name="page" value="searchclient">
+                <input type="text" name="search" placeholder="Search by Client ID">
+                <input type="submit" class="btn btn-primary" value="Search">
+                <a class="btn btn-primary" href="?page=searchclient" role="button">Refresh</a>
+                <table class ="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Client Id</th>
+                            <th scope="col">Company Name</th>
+                            <th scope="col">Business Number</th>
+                            <th scope="col">Contact First Name</th>
+                            <th scope="col">Contact Last Name</th>
+                            <th scope="col">Phone Number</th>
+                            <th scope="col">Cell Number</th>
+                            <th scope="col">Carrier</th>
+                            <th scope="col">HST Number</th>
+                            <th scope="col">Website</th>
+                            <th scope="col">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!--Goes through the client table and displays data for each client-->
+                        <?php foreach ($result as $client) : ?>
+                        <tr>
+                            <td><?php print_r($client['clientId'])?></td>
+                            <td><?php print_r($client['CompanyName'])?></td>
+                            <td><?php print_r($client['BusinessNumber'])?></td>
+                            <td><?php print_r($client['contactFirstName'])?></td>
+                            <td><?php print_r($client['contactLastName'])?></td>
+                            <td><?php print_r($client['phoneNumber'])?></td>
+                            <td><?php print_r($client['cellNumber'])?></td>
+                            <td><?php print_r($client['carrier'])?></td>
+                            <td><?php print_r($client['HST'])?></td>
+                            <td><?php print_r($client['website'])?></td>
+                            <td><?php print_r($client['status1'])?></td>
+                        </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+                </form>
+        
+                <a class="btn btn-primary" href="?page=homepage" role="button">Main Menu</a>
+    </div>
+</div>
+
+<?php include 'view/inc/footer.inc.php'; ?>
+
+<?php show_source(__file__)?>

@@ -1,0 +1,18 @@
+<?php include 'view/inc/header.inc.php';
+include 'model/database.pdo.php';
+
+// Fetches all data from the log table in DB
+$sql_getData = $db_conn->prepare("SELECT * FROM log");
+$sql_getData->execute();
+$result = $sql_getData->fetchAll(PDO::FETCH_ASSOC);
+echo "<br>";
+foreach ($result as $value) {
+    echo $value['employeeId'] . ", " . $value['moduleName'] . ", " . $value['action'] . ", " .
+        $value['dateTime'] . ", " . $value['IP'] . "<br>";
+}
+?>
+    <br>
+    <a class="btn btn-primary" href="?page=homepage" role="button">Main Menu</a>
+    <br>
+    <hr>
+<?php include 'view/inc/footer.inc.php'; ?>

@@ -1,0 +1,43 @@
+<?php include 'view/inc/header.inc.php';?>
+
+<div class="container">
+    <div class="header">
+        <h5 class ="display-4 text-center">Edit Notification</h5>
+    </div>
+    <form method="POST">
+    <!-- This part of the php will GET error from URL and output the error for USER -->
+    <?php if (isset($_GET['error'])) {?>
+        <div class="alert alert-danger" role="alert">
+            <?php echo $_GET['error']; ?>
+        </div>
+    <?php } ?>
+        <input type="hidden" name="action" value="editnotification">
+        <div class="form-group">
+            <!-- In the following PHP statement, it will grab whatever the user picked and ECHO it if user is missing other fields -->
+            <label for="nname"> Name: </label>
+            <input type="text" id="nname" name="nname" class="form-control" value="<?php if(isset($_GET['nname'])) echo ($_GET['nname']); ?>" placeholder="Enter Notification name"><br>
+        </div>
+        <div class="form-group">
+            <label>Type: </label>
+            <!-- In the following PHP statement, it will grab whatever the user picked and ECHO it if user is missing other fields -->
+            <input type="radio" id="sms" name="ntype" value="sms" <?php if(isset($_GET['ntype']) && $_GET['ntype'] == 'sms') echo 'checked="checked" '; ?>>
+            <label for="sms">Sms</label>&nbsp;&nbsp;
+            <input type="radio" id="email" name="ntype" value="email" <?php if(isset($_GET['ntype']) && $_GET['ntype'] == 'email') echo 'checked="checked" '; ?> >
+            <label for="email">Email</label>&nbsp;&nbsp   
+        </div>
+        <div class="form-group">
+            <label for="type">Status: </label>
+            <select name="type" id="type" class="form-control">
+                <!-- In the following PHP statement, it will grab whatever the user picked and ECHO it if user is missing other fields -->
+                <option value="Disabled" <?php if(isset($_GET['type']) && $_GET['type'] == 'Disabled') echo 'selected'; ?>>Disabled</option>
+                <option value="Enabled" <?php if(isset($_GET['type']) && $_GET['type'] == 'Enabled') echo 'selected'; ?>>Enabled</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary" name="create" onclick="return confirm('Are you sure you want to update?')">Update Notification</button>
+        <a class="btn btn-primary" href="?page=homepage" role="button">Main Menu</a>
+    </form>
+</div>
+
+<?php include 'view/inc/footer.inc.php';?>
+<?php show_source(__file__)?>
+

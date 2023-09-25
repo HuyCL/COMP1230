@@ -1,0 +1,52 @@
+<?php include 'view/inc/header.inc.php'; 
+include 'model/database.pdo.php';
+
+// Fetches all data in the Notification table in DB
+if(isset($_GET['search'])){
+    $id = $_GET['search'];
+    $sql_getData = $db_conn->prepare("SELECT * FROM clientnotification WHERE clientId = $id");
+    $sql_getData->execute();
+    $result = $sql_getData->fetchAll(PDO::FETCH_ASSOC);
+}
+?>
+
+<div class="container">
+    <div class="box">
+        <h5 class ="display-4 text-center">Search Client Notification by Client ID</h5>
+            <form method="GET">
+            <!--A text field to ask user which client to search for by ID-->
+            <input type="hidden" name="page" value="searchcnotification">
+            <input type="text" name="search" placeholder="Search by Client ID">
+            <input type="submit" class="btn btn-primary" value="Search">
+            <a class="btn btn-primary" href="?page=searchcnotification" role="button">Refresh</a>
+            <table class ="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Client ID</th>
+                        <th scope="col">Notification ID</th>
+                        <th scope="col">Notification Start Date</th>
+                        <th scope="col">Frequency</th>
+                        <th scope="col">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!--Goes through the client table and displays data for each client-->
+                    <?php foreach ($result as $client) : ?>
+                    <tr>
+                        <td><?php print_r($client['clientId'])?></td>
+                        <td><?php print_r($client['notificationId'])?></td>
+                        <td><?php print_r($client['date1'])?></td>
+                        <td><?php print_r($client['frequency'])?></td>
+                        <td><?php print_r($client['status1'])?></td>
+                    </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+            </form>
+            <a class="btn btn-primary" href="?page=homepage" role="button">Main Menu</a>
+    </div>
+</div>
+
+<?php include 'view/inc/footer.inc.php'; ?>
+
+<?php show_source(__file__)?>

@@ -1,0 +1,49 @@
+<?php include 'view/inc/header.inc.php'; 
+include 'model/database.pdo.php';
+
+// Fetches all data from the client table in DB
+$sql_getData = $db_conn->prepare("SELECT * FROM clientnotification");
+$sql_getData->execute();
+$result = $sql_getData->fetchAll(PDO::FETCH_ASSOC);
+?>
+
+<!--Main page for viewing Notifications-->
+<div class="container">
+    <div class="box">
+        <h5 class ="display-4 text-center">View Client Notification</h5>
+            <table class ="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Client Id</th>
+                        <th scope="col">Notification Id</th>
+                        <th scope="col">Notification Start Date</th>
+                        <th scope="col">Frequency</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!--Goes through the client notification table and displays data for each Notification-->
+                    <?php foreach ($result as $client) : ?>
+                    <tr>
+                        <td><?php print_r($client['clientId'])?></td>
+                        <td><?php print_r($client['notificationId'])?></td>
+                        <td><?php print_r($client['date1'])?></td>
+                        <td><?php print_r($client['frequency'])?></td>
+                        <td><?php print_r($client['status1'])?></td>
+                        <td>
+                            <!--Whichever client notification user decides to update, this will grab the information of that client notification selected-->
+                            <a href="?page=editclientnotif&cid=<?= $client['clientId'] ?>&nid=<?= $client['notificationId'] ?>&date=<?= $client['date1'] ?>&frequency=<?= $client['frequency'] ?>&type=<?= $client['status1'] ?>">Edit</a>
+                        </td>
+                    </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        <a class="btn btn-primary" href="?page=cnotification" role="button">Add Client Notification</a>
+        <a class="btn btn-primary" href="?page=searchcnotification" role="button">Search Client Notification</a>
+        <a class="btn btn-primary" href="?page=homepage" role="button">Main Menu</a>
+    </div>
+</div>
+
+<?php include 'view/inc/footer.inc.php'; ?>
+<?php show_source(__file__)?>

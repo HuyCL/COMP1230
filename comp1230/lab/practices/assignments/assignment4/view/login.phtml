@@ -1,0 +1,17 @@
+<?php include 'view/inc/header.inc.php';?>
+    <!--Page for logging into the system to have access to data-->
+    <div class="login-form" style="position: absolute;left: 45%;top: 20%;">
+        <form method="post" action="../model/login.php">
+            <h2 style="text-align: center">Log in</h2>
+            <div style="margin-bottom: 10px;">
+                <input value="15" type="text" name="employeeId" placeholder="Employee ID" required autocomplete="off" autofocus>
+            </div>
+            <div>
+                <input value="123456" type="password" autocomplete="off" placeholder="Password" name="password" required>
+            </div>
+            <div>
+                <button type="submit" value="Submit" style="margin-top: 10px; margin-left: 35%;">Log in</button>
+            </div>      
+        </form>
+    </div>
+<?php include 'view/inc/footer.inc.php';?>
