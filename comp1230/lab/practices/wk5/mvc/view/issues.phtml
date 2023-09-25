@@ -1,0 +1,25 @@
+<?php include 'view/inc/header.inc.php'; ?>
+    <br>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Reported</th>
+                <th>User</th>
+                <th>Desc</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <?php foreach($issues as $issue): ?>
+                    <?= "<tr>" ?>
+                    <td><?= $issue["id"]?></td>
+                    <td><?= $issue["report_date"]?></td>
+                    <td><?= $issue["user"]?></td>
+                    <td><?= $issue["desc"]?></td>
+                    <?= "</tr>" ?>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+    
+    <?php include 'view/inc/footer.inc.php'; ?>  

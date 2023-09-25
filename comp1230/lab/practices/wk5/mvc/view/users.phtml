@@ -1,0 +1,38 @@
+        <?php include 'view/inc/header.inc.php'; ?>
+        <form>
+            <input type="hidden" name='page' value="users">
+            <label>Filter by:</label>
+            <?php
+                foreach($checkbox_array as $value){
+                    echo "<input type='checkbox' name='$value' value=\"$value\">" . ucfirst($value);
+                }
+            ?>    
+            <input type="submit" value="Submit">
+        </form>
+    <br>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>First</th>
+                <th>Last</th>
+                <th>User</th>
+                <th>Status</th>
+                <th>Client</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <?php foreach($users as $user): ?>
+                    <?= "<tr>" ?>
+                    <td><?= $user["id"]?></td>
+                    <td><?= $user["f_name"]?></td>
+                    <td><?= $user["l_name"]?></td>
+                    <td><?= $user["user_type"]?></td>
+                    <td><?= $user["status"]?></td>
+                    <td><?= $user["client"]?></td>
+                    <?= "</tr>" ?>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+    <?php include 'view/inc/footer.inc.php'; ?>   

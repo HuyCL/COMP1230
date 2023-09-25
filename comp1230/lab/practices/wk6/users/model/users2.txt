@@ -1,0 +1,17 @@
+id,f_name,l_name,user_type
+1,Tom,Friendly,faculty
+2,Negar,Madani,faculty
+3,Ashton,Cox,faculty
+4,Cedric,Kelly,student
+5,Airi,Satou,faculty
+6,Brielle,Williamson,faculty
+7,Herrod,Herrod Chandler,student
+8,Rhona,Davidson,faculty
+9,Sam,Kiani,student
+10,Sonya,Frost,student
+11,Jena,Gaines,faculty
+12,Pari,Naz,faculty
+13,Charde,Marshall,student
+14,Haley,Kennedy,student
+15,Tatyana,Fitzpatrick,faculty
+16,Michael,Silva,faculty
